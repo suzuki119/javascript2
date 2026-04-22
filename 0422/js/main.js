@@ -1,4 +1,8 @@
-import { works } from "./data.js";
-import { renderWorkList } from "./render.js";
+import { greet, schoolName } from "./message.js";
 
-renderWorkList("workList", works);
+console.log(greet("田中"));
+console.log(schoolName);
+
+const target = document.querySelector(`#workslist`);
+
+target.innerHTML = works.map(createWorkItem).join("");
