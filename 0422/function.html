@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>join</title>
+</head>
+<body>
+    <ul class="fruits"></ul>
+    <ul id="workList"></ul>
+
+    <script>
+
+        const fruits = ["りんご", "みかん", "ぶどう"];
+        const result = fruits.join("、"); //りんご、みかん、ぶどう
+        const result_1 = fruits.join("と"); //りんごとみかんとぶどう
+        const result_2 = fruits.join(""); //りんごみかんぶどう
+
+        console.log(result);
+        console.log(result_1);
+        console.log(result_2);
+
+        //map()
+        const html = fruits.map(fruit => `<li>${fruit}</li>`).join("");
+         // <li>りんご</li><li>みかん</li><li>ぶどう</li>
+
+         const fruitsbox=document.querySelector(".fruits");
+         fruitsbox.innerHTML=html;
+
+         // 表示したいデータを配列にまとめている
+            const works = [
+                { title: "バナー制作", category: "graphic" },
+                { title: "LPデザイン", category: "web" },
+                { title: "ポスター制作", category: "graphic" },
+            ];
+
+            // 1件分のデータを li タグの文字列に変換する
+            function createWorkItem(work) {
+                return `<li>${work.title} / ${work.category}</li>`;
+            }
+
+            // 配列全体を受け取って、画面へ表示する
+            function renderWorkList(items) {
+                const target = document.querySelector("#workList");
+                // 1件ずつ createWorkItem() で変換し、1つのHTML文字列にまとめて入れる
+                target.innerHTML = items.map(createWorkItem).join("");
+            }
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback</title>
+</head>
+<body>
+    <script>
+                // works 配列を渡して、一覧表示を実行する
+                renderWorkList(works);
+
+                function runTask(callback) {
+                    console.log("処理を開始します");
+                    callback();
+                }
+
+                function showMessage() {
+                    console.log("処理が終わりました");
+                }
+
+                runTask(showMessage);
+    </script>
+
+</body>
+</html>
