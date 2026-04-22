@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" class="student_name" value="">名前<br>
+    <input type="text" class="student_grade" value="">学年
+
+    <p class="student_list"></p>
+
+    <input type="submit" value="確定" class="check">
+
+    <script>
+        //名前の配列
+        const namelist = ["鈴木", "田中", "丸井"]
+
+        // function great(name){
+        //     return `こんにちは、${name}さん`;
+        // }
+
+        //挨拶関数
+        const great = name => {//functionと違い関数呼び出しより下に書けないので安全
+            return `こんにちは、${name}さん`;
+        }
+
+        // const students = ["田中", "鈴木", "佐藤"];
+        // for (let i = 0; i < students.length; i++) {
+        //     console.log(students[i]);
+        // }
+        namelist.forEach((name) => {
+            console.log(`こんにちは、${name}さん`);
+        })
+        console.log(great('大前田'));
+
+        //消費税
+        function tax(price) {
+            return Math.floor(price * 1.1);
+        };
+        const nedan = tax(12200);
+        console.log(nedan);
+
+
+        //3割引
+        const sell = price => {
+            return price - Math.floor(price * 0.3);
+        };
+        const nedan_1 = sell(12980);
+        console.log(nedan_1 + "円でした")
+
+        //中日と渡すとドラゴンズが帰る
+        const doragons = teamName => {
+            if (teamName == "中日") {
+                return "ドラゴンズ";
+            }
+        };
+        console.log(doragons("中日"));
+
+
+        //さまをつけろよ
+        const studentsNames = namelist.map(function (name) {
+            return name + "さま";
+        });
+        studentsNames.forEach((name) => {
+            console.log(name);
+        })
+
+        //スコア
+        const scores = [];
+        for (let i = 0; i < 10; i++) {
+            scores.push(Math.floor(Math.random() * 100));
+        }
+
+        const passedScores = scores.filter((score) => {
+            return score >= 60;
+        });
+        console.log(passedScores);
+
+        //ナンバーズ
+        const numbers = [1, 2, 3];
+        function doubleNumber(number) {
+            return number * 2;
+        }
+        const doubledNumbers = numbers.map(doubleNumber);
+        console.log(doubledNumbers);
+
+        //生徒
+        const student = {
+            name: "田中",
+            grade: 2,
+            course: "Webデザイン",
+        };
+
+        console.log(student.name);
+
+
+        function runTask(callback) {
+            console.log("処理を開始します");
+            callback();
+        }
+
+        function showMessage() {
+            console.log("処理が終わりました");
+        }
+
+        runTask(showMessage);
+
+
+        //演習
+
+        //生徒追加の機能
+        const checkBtn = document.querySelector(".check");
+        const nameData = document.querySelector(".student_name");
+        const gradeData = document.querySelector(".student_grade");
+        const student_list = document.querySelector(".student_list");
+
+
+        checkBtn.addEventListener('click', function () {
+            const new_student = { name: String(nameData.value), grade: Number(gradeData.value) }
+            newStudent(new_student);
+            students.forEach(function (student) {
+                // createStudentText(student) を使って
+                // 1件ずつ console.log() で表示する
+                // ここに書く
+                console.log(createStudentText(student));
+            });
+        })
+
+        const students = [
+            { name: "田中", grade: 2 },
+            { name: "鈴木", grade: 2 },
+            { name: "佐藤", grade: 1 },
+        ];
+
+        const newStudent = student => {
+            students.push({ name: student.name, grade: student.grade })
+        }
+
+        function createStudentText(student) {
+            // student.grade と student.name を使って
+            // 「2年の田中さん」のような文字列を返す
+            // ここに書く
+            return student.grade + "年の" + student.name + "さん";
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
