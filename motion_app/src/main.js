@@ -1,60 +1,131 @@
-import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
+import { animate } from "motion";
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+const btn = document.querySelector("#copyBtn");
+const icon = btn.querySelector(".copy-icon");
+const label = btn.querySelector(".copy-label");
+// コピー状態を管理するフラグ(let)
+let isCopying = false;
 
-<div class="ticks"></div>
+// コピー後の状態に切り替える
+//普通の関数の定義
+function showCopied() {
+  icon.textContent = "✅";
+  label.textContent = "コピーしました";
+  btn.classList.add("copied");
+  animate(btn, { scale: [1, 1.08, 1] }, { duration: 0.25 });
+}
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+// 元の状態に戻す
+//関数式の定関数の定義
+const resetButton = function () {
+  icon.textContent = "📋";
+  label.textContent = "コピー";
+  btn.classList.remove("copied");
+  isCopying = false;
+};
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+//アロー関数の定義
+btn.addEventListener("click", () => {
+  // コピー状態のときは何もしない
+  //returnのあとは実行しない
+  if (isCopying) return;
+  isCopying = true;
 
-setupCounter(document.querySelector('#counter'))
+  //setTimeoutは一定時間後に関数を実行する
+  showCopied();
+  setTimeout(resetButton, 2000);
+});
+
+const rippleButton = document.querySelector("#rippleBtn");
+const RIPPLE_SIZE = 80; // CSSのwidthと合わせる
+
+// 左下・右下のうちクリック位置に近い方を返す
+const getNearestCorner = (rect, x, y) => {
+  const corners = [
+    { x: 0, y: rect.height },
+    { x: rect.width, y: rect.height },
+  ];
+  return corners.reduce((a, b) => {
+    const da = (a.x - x) ** 2 + (a.y - y) ** 2;
+    const db = (b.x - x) ** 2 + (b.y - y) ** 2;
+    return da < db ? a : b;
+  });
+};
+
+// 指定位置に波紋要素を生成して追加する
+function createRipple(parent, x, y, size) {
+  const ripple = document.createElement("span");
+  ripple.classList.add("ripple");
+  ripple.style.left = `${x - size / 2}px`;
+  ripple.style.top = `${y - size / 2}px`;
+  parent.append(ripple);
+  return ripple;
+}
+
+// 波紋を広げて消すアニメーション
+//　関数式の関数の定義、引数つき
+const playRipple = function (ripple) {
+  return animate(
+    ripple,
+    { scale: [0, 5], opacity: [1, 0] },
+    { duration: 0.8, ease: [0.2, 0, 0.4, 1] },
+  ).then(() => ripple.remove());
+};
+
+rippleButton.addEventListener("click", (e) => {
+  console.log(e.clientX);
+  const rect = rippleButton.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+  //要素のサイズとブラウザ画面での位置を取得するためのメソッド
+  const nearest = getNearestCorner(rect, cx, cy);
+  //入った変数の値を更に関数に入れて、戻ってきた値がripple
+  const ripple = createRipple(rippleButton, nearest.x, nearest.y, RIPPLE_SIZE);
+  //アニメーションの関数を実行
+  playRipple(ripple);
+});
+
+
+
+//関数の定義一覧
+//1 function
+//2 関数名=function(){}
+//3 const 関数名 = () => {}
+//4 const()
+
+const tiltCard = document.querySelector("#tiltCard");
+
+// カード内でのマウス位置を -0.5〜0.5 の範囲に正規化する
+function getNormalizedPosition(rect, clientX, clientY) {
+  const x = (clientX - rect.left) / rect.width - 0.5;
+  const y = (clientY - rect.top) / rect.height - 0.5;
+  return { x, y };
+}
+
+// カードを傾ける
+const tilt = function (card, x, y) {
+  animate(
+    card,
+    { rotateX: -y * 40, rotateY: x * 40, scale: 1.1 },
+    { duration: 0.1, ease: "linear" },
+  );
+};
+
+// カードを元に戻す
+const resetTilt = (card) => {
+  animate(
+    card,
+    { rotateX: 0, rotateY: 0, scale: 1 },
+    { duration: 0.4, ease: "ease-out" },
+  );
+};
+
+tiltCard.addEventListener("mousemove", (e) => {
+  const rect = tiltCard.getBoundingClientRect();
+  const { x, y } = getNormalizedPosition(rect, e.clientX, e.clientY);
+  tilt(tiltCard, x, y);
+});
+
+tiltCard.addEventListener("mouseleave", () => {
+  resetTilt(tiltCard);
+});
