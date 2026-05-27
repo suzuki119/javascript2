@@ -1,0 +1,32 @@
+# 依存パッケージ
+
+node_modules/
+
+# 環境変数・秘密情報
+
+.env
+.env.local
+
+# ログ
+
+_.log
+npm-debug.log_
+yarn-debug.log*
+yarn-error.log*
+
+# ビルド結果
+
+dist/
+build/
+
+# OS・エディタのゴミ
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 一時ファイル
+
+_.tmp
+_.temp
