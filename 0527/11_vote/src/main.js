@@ -1,11 +1,26 @@
 import { inView, animate, stagger, scroll, color, transform, scale } from "motion";
 
 
+inView(".fade-target h2", (element) => {
+  animate(element, { opacity: [0, 1], y: [40, 0] }, { duration: 1 });
+});
+
+
+
+const cardAnimate = function (element) {
+  animate(element, { opacity: [0, 1], y: [40, 0], rotateY: [0, 360] }, { duration: 1, delay: stagger(0.5) });
+};
+
+inView('.cards', () => {
+  cardAnimate('.card');
+});
+
+
 
 const showWithExit = function (element) {
   animate(element, { opacity: [0, 1], y: [80, 0] }, { duration: 0.6 });
 
-    animate(element, { background: ["#ffeaea", "#960505"], color: ["#000", "#fff"], rotateY: [0, 360], filter: ["blur(10px)", "blur(0px)"] }, { duration: 2.0 });
+    animate(element, { background: ["#ffeaea", "#960505"], color: ["#000", "#fff"],  filter: ["blur(10px)", "blur(0px)"] }, { duration: 2.0 });
 
   // MotionのinView()の仕様：コールバック関数の中で return した関数は、要素が画面外に出たときに実行される
   return () => {
