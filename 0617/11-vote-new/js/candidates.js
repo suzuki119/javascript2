@@ -1,0 +1,63 @@
+// ⬇ ファイル冒頭に追加：永続化用のキー
+const STORAGE_KEY = "vote-2026";
+
+// candidates.js
+// 自分のテーマに合わせて書き直してください。
+const initialCandidates = [
+  { id: 1, votes: 0 },
+  { id: 2, votes: 0 },
+  { id: 3, votes: 0 },
+  { id: 4, votes: 0 },
+];
+
+let voteIndex = 1;
+
+const loadCandidates = () => {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  return saved ? JSON.parse(saved) : initialCandidates;//? JSON.parse(saved) : initialCandidatesでデータを配列に変換.
+};
+
+let candidates = loadCandidates();
+console.log(candidates);
+
+// 票数テキストを更新する関数
+const updateVoteText = () => {
+  candidates.forEach((item) => {
+    const card = document.querySelector(`[data-id="${item.id}"]`);
+    card.querySelector('.votes').textContent = `${item.votes}票`;
+  });
+};
+
+// 各候補の得票率を返す関数
+export const getRates = () => {
+  const total = candidates.reduce((sum, item) => sum + item.votes, 0);
+  return candidates.map((item) => ({
+    id: item.id,
+    rate: total > 0 ? Math.round((item.votes / total) * 100) : 0,
+  }));
+};
+
+// 投票処理の関数
+
+export const vote = (id) => {
+  candidates = candidates.map((c) =>
+    c.id === id ? { ...c, votes: c.votes + 1 } : c
+  );
+  saveCandidates(candidates);
+  updateVoteText();
+};
+
+
+
+const saveCandidates = (candidates) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(candidates));
+};
+
+
+export const resetCandidates = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  candidates = initialCandidates.map((c) => ({ ...c }));
+  updateVoteText();
+};
+
+updateVoteText();

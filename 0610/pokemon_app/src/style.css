@@ -89,7 +89,7 @@ h1 {
     width: 180px;
     height: 180px;
     image-rendering: pixelated;
-    border: 1px solid var(--line);
+
     margin: 8px auto;
 }
 
@@ -119,6 +119,59 @@ h1 {
     color: #fff;
 }
 
+.stats-title {
+    margin: 20px 0 10px;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-row {
+    display: grid;
+    grid-template-columns: 72px 36px 1fr;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-name {
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.stat-value {
+    font-size: 0.9rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.stat-bar {
+    height: 10px;
+    background: #e0e0e0;
+    border: 1px solid var(--line);
+    overflow: hidden;
+}
+
+.stat-bar-fill {
+    display: block;
+    height: 100%;
+    background: var(--line);
+}
+
+.runner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    image-rendering: pixelated;
+    pointer-events: none;
+    z-index: 1000;
+}
+
 .loader:not([hidden]) {
     display: flex;
     justify-content: center;
@@ -131,4 +184,43 @@ h1 {
     border: 5px solid #e0e0e0;
     border-top-color: var(--line);
     border-radius: 50%;
+}
+
+.fav-btn {
+    margin-top: 16px;
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.fav-btn:hover {
+    background: var(--text);
+    color: #fff;
+}
+
+.favorites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.fav-chip {
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.fav-chip:hover {
+    background: var(--text);
+    color: #fff;
+}
+
+.fav-empty {
+    color: var(--muted);
+    font-size: 0.9rem;
 }

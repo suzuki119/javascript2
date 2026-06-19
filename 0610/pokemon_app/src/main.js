@@ -16,6 +16,7 @@ const load = async (name) => {
   try {
     const data = await getPokemon(name, controller.signal);
     renderPokemon(data);
+
   } catch (err) {
     if (err.name === "AbortError") return;
     console.error(err);
@@ -28,9 +29,4 @@ const load = async (name) => {
 document.querySelector("#searchForm").addEventListener("submit", (e) => {
   e.preventDefault();
   load(document.querySelector("#keyword").value.trim().toLowerCase());
-});
-
-document.querySelector("#numberForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  load(document.querySelector("#number").value.trim());
 });
