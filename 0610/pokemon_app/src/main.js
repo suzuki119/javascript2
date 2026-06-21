@@ -30,3 +30,12 @@ document.querySelector("#searchForm").addEventListener("submit", (e) => {
   e.preventDefault();
   load(document.querySelector("#keyword").value.trim().toLowerCase());
 });
+
+// 全国図鑑のポケモン数（第9世代まで）
+const TOTAL_POKEMON = 1025;
+
+document.querySelector("#randomBtn").addEventListener("click", () => {
+  const id = Math.floor(Math.random() * TOTAL_POKEMON) + 1;
+  document.querySelector("#keyword").value = id;
+  load(id);
+});
