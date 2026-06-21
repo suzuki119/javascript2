@@ -1,9 +1,9 @@
 import "./style.css";
-import { animate } from "motion";
 import { getPokemon } from "./api.js";
 import { renderPokemon, showError, setLoading } from "./view.js";
+import { spinSpinner } from "./animations.js";
 
-animate(document.querySelector(".spinner"), { rotate: [0, 360] }, { duration: 1, repeat: Infinity, ease: "linear" });
+spinSpinner(document.querySelector(".spinner"));
 
 let controller;
 

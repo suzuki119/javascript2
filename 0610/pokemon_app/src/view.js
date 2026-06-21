@@ -1,4 +1,4 @@
-import { animate } from "motion";
+import { runAcross, popImage } from "./animations.js";
 const card = document.querySelector(".card");
 const errorEl = document.querySelector(".error");
 const loader = document.querySelector(".loader");
@@ -64,20 +64,11 @@ export const renderPokemon = (data) => {
   runner.src = data.sprites.front_default;
   runner.hidden = false;
   running?.stop();
-  running = animate(runner, { x: [window.innerWidth, -120] }, { duration: 4, repeat: Infinity, ease: "linear" });
+  running = runAcross(runner);
 
   const pokemonImage = document.querySelector("#pokemonImage");
   // 画像そのものをクリックしたときのアニメーション（ポンッと弾む）
-  pokemonImage.addEventListener("click", () => {
-    let randomAnimation = Math.floor(Math.random() * 3);
-    if (randomAnimation === 0) {
-      animate(pokemonImage, { scale: [1, 1.5, 1] }, { duration: 0.3, ease: "easeOut" });
-    } else if (randomAnimation === 1) {
-      animate(pokemonImage, { rotate: [0, 20, -20, 0] }, { duration: 0.3, ease: "easeOut" });
-    } else {
-          animate(pokemonImage, { scale: [0.8,1.5, 1], rotate: [0,  100, 200, 360],translateY: [0,5, -50,-55, 0] }, { duration: 0.3, ease: "easeOut" });
-    }
-  });
+  pokemonImage.addEventListener("click", () => popImage(pokemonImage));
 
   document.querySelectorAll(".sprite-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
