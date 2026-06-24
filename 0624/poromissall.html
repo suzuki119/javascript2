@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>複数APIと接続</title>
+</head>
+<body>
+
+    <script>
+        async function loadAll() {
+                const [weather, pokemon] = await Promise.all([
+                    fetch('https://www.jma.go.jp/bosai/forecast/data/forecast/130000.json').then((r) => r.json()),
+                    fetch('https://pokeapi.co/api/v2/pokemon/pikachu').then((r) => r.json()),
+                ]);                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+                console.log(weather, pokemon);
+            }
+
+            loadAll();
+
+    </script>
+
+</body>
+</html>

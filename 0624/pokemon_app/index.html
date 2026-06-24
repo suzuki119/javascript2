@@ -1,0 +1,31 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+<main class="app">
+    <h1>ポケモン検索</h1>
+
+    <form id="searchForm" class="search">
+        <input id="keyword" type="text" placeholder="例：pikachu or 25" required />
+        <button type="submit">検索</button>
+        <button id="randomBtn" type="button">ランダム</button>
+    </form>
+
+    <div class="loader" hidden>
+        <div class="spinner" aria-label="読み込み中"></div>
+    </div>
+
+    <div id="history" class="history"></div>
+
+    <p class="error" hidden></p>
+    <article class="card" hidden></article>
+</main>
+
+<script type="module" src="/src/main.js"></script>
+
+
+</body>
