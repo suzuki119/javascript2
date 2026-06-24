@@ -4,10 +4,6 @@ import { animate } from "motion";
 export const spinSpinner = (el) =>
   animate(el, { rotate: [0, 360] }, { duration: 1, repeat: Infinity, ease: "linear" });
 
-// 画面の右外 → 左外へポケモンを走らせる（ループ）
-export const runAcross = (el) =>
-  animate(el, { x: [window.innerWidth, -120] }, { duration: 4, repeat: Infinity, ease: "linear" });
-
 // 画像クリック時のランダムな弾みアニメーション（3パターン）
 export const popImage = (el) => {
   const variant = Math.floor(Math.random() * 3);

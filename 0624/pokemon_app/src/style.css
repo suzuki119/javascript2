@@ -87,7 +87,7 @@ h1 {
 
 .card img {
     width: 180px;
-    height: 180px;
+    height: auto;
     image-rendering: pixelated;
 
     margin: 8px auto;
@@ -125,41 +125,209 @@ h1 {
     text-align: left;
 }
 
+/* ===== 実数値計算パネル ===== */
+
+.calc-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.calc-controls label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.calc-controls input,
+.calc-controls select {
+    padding: 4px 6px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fff;
+}
+
+.calc-controls #levelInput {
+    width: 52px;
+    text-align: center;
+}
+
+.lv-presets {
+    display: flex;
+    gap: 4px;
+}
+
+.lv-btn {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.lv-btn:hover {
+    background: var(--text);
+    color: #fff;
+}
+
+.nature-label {
+    margin-left: auto;
+}
+
+/* 努力値の合計バー */
+.ev-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.ev-bar {
+    flex: 1;
+    height: 8px;
+    background: #eee;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ev-bar-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: #4a90d9;
+    transition: width 0.15s ease;
+}
+
+.ev-bar-fill.over,
+#evTotal.over {
+    background: #d33;
+    color: #d33;
+}
+
+.ev-reset {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.ev-reset:hover {
+    background: #f0f0f0;
+}
+
+/* ===== ステータス表 ===== */
+
 .stats {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .stat-row {
     display: grid;
-    grid-template-columns: 72px 36px 1fr;
+    grid-template-columns: minmax(58px, 1fr) 34px 42px 44px minmax(110px, 1.7fr);
     align-items: center;
     gap: 8px;
+}
+
+.stat-head {
+    font-size: 0.72rem;
+    color: #999;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 4px;
+}
+
+.stat-head .stat-name,
+.stat-head .stat-value,
+.stat-head .real-value,
+.stat-head .stat-col-label {
+    font-weight: 400;
+    color: #999;
+}
+
+.stat-col-label {
+    text-align: center;
 }
 
 .stat-name {
     font-size: 0.9rem;
     text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.nature-mark {
+    font-size: 0.7rem;
+}
+
+.nature-up .stat-name {
+    color: #d34a4a;
+}
+
+.nature-down .stat-name {
+    color: #4a90d9;
 }
 
 .stat-value {
     font-size: 0.9rem;
-    text-align: right;
+    text-align: center;
+    color: var(--muted);
     font-variant-numeric: tabular-nums;
 }
 
-.stat-bar {
-    height: 10px;
-    background: #e0e0e0;
-    border: 1px solid var(--line);
-    overflow: hidden;
+.real-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
 }
 
-.stat-bar-fill {
-    display: block;
-    height: 100%;
-    background: var(--line);
+.iv-input,
+.ev-input {
+    width: 100%;
+    padding: 3px 2px;
+    font-size: 0.85rem;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* number入力のスピンボタンを消してすっきり見せる */
+.iv-input::-webkit-outer-spin-button,
+.iv-input::-webkit-inner-spin-button,
+.ev-input::-webkit-outer-spin-button,
+.ev-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ev-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ev-range {
+    flex: 1;
+    min-width: 0;
+    accent-color: #4a90d9;
+    cursor: pointer;
+}
+
+.ev-cell .ev-input {
+    width: 44px;
+    flex: none;
 }
 
 .history {
