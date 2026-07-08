@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+        <button id="btn1">りんご</button>
+        <button id="btn2">みかん</button>
+        <button id="btn3">バナナ</button>
+        <p id="message"></p>
+
+
+    <script>
+
+        const numbers = [35, 80, 42, 67, 15, 90];
+
+
+
+        numbers.forEach(number => {
+            if(number>=50){
+            console.log(number);
+            }
+        });
+
+        const scores = [60, 75, 90];
+
+        const NewScore=scores.map(score=> score+5);
+        console.log(NewScore);
+
+        const members = [
+                { id: 101, name: '山田', grade: 1 },
+                { id: 102, name: '佐藤', grade: 2 },
+                { id: 103, name: '鈴木', grade: 3 }
+            ];
+
+        console.log(members.filter(member => member.grade >= 2));
+        console.log(members.find(member => member.id === 102));
+
+        const fruits=document.querySelectorAll("button");
+        console.log(fruits);
+
+        fruits.forEach(fruit =>{
+            fruit.addEventListener('click',function(){
+                showMessage(fruit.textContent);
+            })
+        })
+
+        const showMessage=(name)=>{
+            document.querySelector("#message").textContent=name+ "が選択されました";
+        };
+
+
+
+        async function getData(url) {
+
+                try {
+
+                const res = await fetch(url);
+
+                const data = await res.json();
+                return data;
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        const data=  getData("https://jsonplaceholder.typicode.com/todos");
+        console.log(data);
+
+
+
+
+
+
+        const profile = {
+                nickname: 'Taro',
+                level: 5
+            };
+
+            localStorage.setItem("profile", JSON.stringify(profile));
+
+            const raw = localStorage.getItem("profile");
+
+            const user = raw ? JSON.parse(raw) : null;
+            console.log(user);
+
+        const books = [
+                { title: 'HTML入門', price: 1800 },
+                { title: 'CSS入門', price: 2200 },
+                { title: 'JavaScript入門', price: 2500 },
+                { title: 'PHP入門', price: 1900 }
+        ];
+
+        const cBook=books.filter(book=>book.price<2000);
+        const nbook=books.map(book=>book.title);
+        const AllPrice=books.map(book=>book.price).reduce((all, price) => all += price, 0);
+        console.log(cBook,nbook, AllPrice);
+
+
+
+
+
+
+    </script>
+
+    <script type="module" src="./app.js"></script>
+</body>
+</html>
